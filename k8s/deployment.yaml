@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-api
+  template:
+    metadata:
+      labels:
+        app: flask-api
+    spec:
+      containers:
+      - name: flask-api
+        image: flask_api_project:latest  # Update this with your Docker registry if necessary
+        resources:
+            limits:
+              cpu: '4'
+              memory: '8192'
+            requests:
+              cpu: '4'
+              memory: '8192'
+        ports:
+        - containerPort: 5001
