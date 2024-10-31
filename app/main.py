@@ -1,14 +1,22 @@
-from flask import Flask, jsonify
+from fastapi import FastAPI
+from pydantic import BaseModel
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route('/hello', methods=['GET'])
-def hello():
-    return jsonify(message="Hello from Flask in Docker and Kubernetes!")
+class HelloResponse(BaseModel):
+    message: str
+    
+class HomeResponse(BaseModel):
+    message: str
 
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify(message="You are home")
+@app.get("/hello", response_model=HelloResponse)
+async def hello():
+    return {"message": "Hello from FastAPI in Docker and Kubernetes!"}
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+@app.get("/", response_model=HomeResponse)
+async def home():
+    return {"message": "Welcome home"}
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}

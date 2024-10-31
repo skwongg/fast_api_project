@@ -1,0 +1,1 @@
+Sandbox for python fastapi environment development using docker, docker compose and kubernetes (minikube)
