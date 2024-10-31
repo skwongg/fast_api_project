@@ -22,4 +22,4 @@ minikube service fastapi-hello-world
 
 should redirect you to a tunnel of the root fastapi page.
 
-if you run into issues with minikube build hanging or tunneling try running `eval $(minikube -p minikube docker-env)` from a sterile terminal to point your shell to minikube's docker-daemon.
+if you run into issues with minikube build hanging or tunneling try running `eval $(minikube -p minikube docker-env)` from a sterile terminal to point your shell to minikube's docker-daemon. <3
