@@ -1,7 +1,28 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from databases import Database
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean
+
+DATABASE_URL = "sqlite:///./test.db"
+database = Database(DATABASE_URL)
 
 app = FastAPI()
+
+metadata = MetaData()
+# Define a sample table
+items = Table(
+    "items",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String, index=True),
+    Column("description", String),
+    Column("price", Integer),
+    Column("available", Boolean, default=True),
+)
+
+engine = create_engine(DATABASE_URL)
+metadata.create_all(engine)
+
 
 class HelloResponse(BaseModel):
     message: str
